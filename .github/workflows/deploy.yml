@@ -28,13 +28,13 @@ jobs:
       - name: Set up SSH agent
         uses: webfactory/ssh-agent@v0.9.0
         with:
-          ssh-private-key: {% raw %}${{ secrets.DO_SSH_KEY }}{% endraw %} # The SSH private key stored in GitHub secrets.
+          ssh-private-key: ${{ secrets.DO_SSH_KEY }} # The SSH private key stored in GitHub secrets. ssh-private-key: {% raw %}${{ secrets.DO_SSH_KEY }}{% endraw %}
 
       - name: Sync files to DigitalOcean Droplet using rsync
         run: |
           # Define SSH connection info
           SSH_USER="jetty"
-          DO_DROPLET_IP={% raw %}${{ secrets.DO_DROPLET_IP}}{% endraw %}
+          DO_DROPLET_IP="${{ secrets.DO_DROPLET_IP}}"
           APP_NAME="sp3-app"
           REMOTE_PATH="/home/jetty/deployment/site/$APP_NAME/"
 
